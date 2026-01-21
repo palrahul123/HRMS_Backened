@@ -18,7 +18,7 @@ namespace HRMS
         }
 
         [HttpPost("signin")]
-        public async Task<ActionResult<AuthenticationResponse>> SignInAsync(SignInRequest request)
+        public async Task<ActionResult<AuthenticationResponse>> SignInAsync(LoginRequestDto request)
         {
             try
             {
@@ -36,7 +36,7 @@ namespace HRMS
         }
 
         [HttpPost("signup")]
-        public async Task<ActionResult<AuthenticationResponse>> SignUpAsync(SignUpRequest request)
+        public async Task<ActionResult<AuthenticationResponse>> SignUpAsync(UserRequestDto request)
         {
             try
             {

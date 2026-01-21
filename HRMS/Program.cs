@@ -1,8 +1,11 @@
+using Infrastructure.Identity.Extensions;
+
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddOpenApi();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddIdentityInfrastructure();
 
 var app = builder.Build();
 if (app.Environment.IsDevelopment())

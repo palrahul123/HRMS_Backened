@@ -30,13 +30,15 @@ namespace Infrastructure.Identity.Services
             await _signInManager.SignOutAsync();
         }
 
-        public async Task<AuthenticationResponse> SignUpAsync(SignUpRequest request)
+        public async Task<AuthenticationResponse> SignUpAsync(SignUpRequest request, int entryBy)
         {
-            ApplicationUser user = new ApplicationUser
-            {
-                Email = request.Email,
-                UserName = request.Email
-            };
+            var user = _mapper.Map<ApplicationUser>(request);
+
+            user.IsActive = true;
+            user.EntryBy = entryBy;
+            user.UpdateBy = entryBy;
+            user.EntryDate = DateTime.UtcNow;
+            user.UpdateDate = DateTime.UtcNow;
 
             IdentityResult result = await _userManager.CreateAsync(user, request.Password);
 

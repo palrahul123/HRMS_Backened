@@ -2,7 +2,7 @@
 
 namespace Core.Application.DTOs
 {
-    public class SignInRequest
+    public class LoginRequestDto
     {
         [JsonPropertyName("email")]
         public string Email { get; set; }
