@@ -1,8 +1,11 @@
-﻿namespace Core.Domain
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Core.Domain
 {
     public class BaseEntity
     {
-        public Guid Id { get; set; }
+        [Key]
+        public int Id { get; set; }
         public bool IsActive { get; set; }
         public int EntryBy { get; set; }
         public DateTime EntryDate { get; set; }

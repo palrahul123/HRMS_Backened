@@ -1,11 +1,12 @@
-using Infrastructure.Identity.Extensions;
+
+
+using Infrastructure.Persistence.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddOpenApi();
-
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddIdentityInfrastructure();
+builder.Services.AddPersistenceData(builder.Configuration);
 
 var app = builder.Build();
 if (app.Environment.IsDevelopment())
