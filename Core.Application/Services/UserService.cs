@@ -70,7 +70,7 @@ namespace Core.Application.Services
 
             var authResponse = _mapper.Map<AuthenticationResponse>(user);
 
-            authResponse.Token = _jwtService.GeneratorToken(user);
+            authResponse.Token = _jwtService.GenerateToken(user);
 
             return authResponse;
         }

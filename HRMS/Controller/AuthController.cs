@@ -1,4 +1,5 @@
 ﻿using Core.Application.DTOs.UserProfile;
+using Core.Application.Interface.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HRMS.Controller
@@ -7,10 +8,10 @@ namespace HRMS.Controller
     [ApiController]
     public class AuthController : ControllerBase
     {
-        private readonly IAuthService _authService;
-        public AuthController(IAuthService authService)
+        private readonly IUserService _userService;
+        public AuthController(IUserService userService)
         {
-            _authService = authService;
+            _userService = userService;
         }
 
         [HttpPost("Login")]
@@ -19,7 +20,7 @@ namespace HRMS.Controller
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            AuthenticationResponse response = await _authService.Login(loginRequest);
+            AuthenticationResponse response = await _userService.GetDetailByEmailandPassword(loginRequest);
             return Ok(response);
         }
     }
