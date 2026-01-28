@@ -1,4 +1,5 @@
-﻿using Core.Application.DTOs.UserProfile;
+﻿using Core.Application.Common;
+using Core.Application.DTOs.UserProfile;
 using Core.Application.Interface.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,14 +15,22 @@ namespace HRMS.Controller
             _userService = userService;
         }
 
-        [HttpPost("Login")]
-        public async Task<IActionResult> Login([FromBody] LoginRequestDto loginRequest)
+        [HttpPost("login")]
+        public async Task<IActionResult> Login([FromBody] LoginRequestDto loginDto)
         {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
+            if (loginDto == null || string.IsNullOrWhiteSpace(loginDto.Email) || string.IsNullOrWhiteSpace(loginDto.Password))
+            {
+                return BadRequest(new APIResponse(false, "Email and password are required."));
+            }
 
-            AuthenticationResponse response = await _userService.GetDetailByEmailandPassword(loginRequest);
-            return Ok(response);
+            var authResponse = await _userService.GetDetailByEmailandPassword(loginDto);
+
+            if (authResponse == null)
+            {
+                return Unauthorized(new APIResponse(false, "Invalid email or password."));
+            }
+
+            return Ok(new APIResponse(true, "Login successful", authResponse));
         }
     }
 }
