@@ -15,7 +15,7 @@ namespace Infrastructure.Persistence.Services
 
         public async Task<IEnumerable<Company>> GetAllAsync()
         {
-            return await _context.companies
+            return await _context.Companies
                 .Include(x => x.Country)
                 .Include(x => x.State)
                 .Include(x => x.City)
@@ -24,7 +24,7 @@ namespace Infrastructure.Persistence.Services
 
         public async Task<Company?> GetByIdAsync(int id)
         {
-            return await _context.companies
+            return await _context.Companies
                 .Include(x => x.Country)
                 .Include(x => x.State)
                 .Include(x => x.City)
@@ -33,19 +33,19 @@ namespace Infrastructure.Persistence.Services
 
         public async Task AddAsync(Company company)
         {
-            await _context.companies.AddAsync(company);
+            await _context.Companies.AddAsync(company);
             await _context.SaveChangesAsync();
         }
 
         public async Task UpdateAsync(Company company)
         {
-            _context.companies.Update(company);
+            _context.Companies.Update(company);
             await _context.SaveChangesAsync();
         }
 
         public async Task DeleteAsync(Company company)
         {
-            _context.companies.Remove(company);
+            _context.Companies.Remove(company);
             await _context.SaveChangesAsync();
         }
     }
