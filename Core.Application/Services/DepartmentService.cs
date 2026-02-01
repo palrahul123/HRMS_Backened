@@ -1,11 +1,12 @@
 ﻿using AutoMapper;
 using Core.Application.DTOs.DepartmentDtos;
 using Core.Application.Interface.Repositories;
+using Core.Application.Interface.Services;
 using Core.Domain;
 
 namespace Core.Application.Services
 {
-    public class DepartmentService
+    public class DepartmentService : IDepartmentService
     {
         private readonly IDepartmentRepository _repository;
         private readonly IMapper _mapper;
